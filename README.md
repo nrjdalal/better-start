@@ -13,13 +13,18 @@ npm i -D drizzle-kit
 
 ```env
 # .env
+
 BETTER_AUTH_URL=http://localhost:3000
+# can be generated using `npx nanoid`
 BETTER_AUTH_SECRET=
+# can be generated using `npx pglaunch`
 POSTGRES_URL=
+
 ```
 
 ```ts
 // drizzle.config.ts
+
 import { defineConfig } from "drizzle-kit"
 
 export default defineConfig({
@@ -34,6 +39,7 @@ export default defineConfig({
 
 ```ts
 // src/db/index.ts
+
 import { drizzle, type PostgresJsDatabase } from "drizzle-orm/postgres-js"
 import postgres from "postgres"
 
@@ -65,6 +71,7 @@ export { db }
 
 ```ts
 // src/db/schema/auth.ts
+
 import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const user = pgTable("user", {
