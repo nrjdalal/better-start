@@ -188,9 +188,9 @@ export const ServerRoute = createServerFileRoute().methods({
 npx drizzle-kit push
 ```
 
-<details><summary>Expected Output</summary><br/>
+<details><summary>Expected Output:</summary>
 
-```sh
+```txt
 No config path provided, using default 'drizzle.config.ts'
 Reading config file '/path/to/file/drizzle.config.ts'
 Using 'postgres' driver for database querying
