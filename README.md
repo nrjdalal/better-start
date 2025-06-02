@@ -131,10 +131,6 @@ export const verification = pgTable("verification", {
 })
 ```
 
-```sh
-npx drizzle-kit push
-```
-
 ```ts
 // src/lib/auth/index.ts
 
@@ -187,3 +183,19 @@ export const ServerRoute = createServerFileRoute().methods({
   },
 })
 ```
+
+```sh
+npx drizzle-kit push
+```
+
+<details><summary>Expected Output</summary><br/>
+
+```sh
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/path/to/file/drizzle.config.ts'
+Using 'postgres' driver for database querying
+[✓] Pulling schema from database...
+[✓] Changes applied
+```
+
+</details>
