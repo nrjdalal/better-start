@@ -130,3 +130,60 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at").$defaultFn(() => /* @__PURE__ */ new Date()),
 })
 ```
+
+```sh
+npx drizzle-kit push
+```
+
+```ts
+// src/lib/auth/index.ts
+
+import { db } from "@/db"
+import { betterAuth } from "better-auth"
+import { drizzleAdapter } from "better-auth/adapters/drizzle"
+import { reactStartCookies } from "better-auth/react-start"
+
+import { account, session, user, verification } from "@/db/schema/auth"
+
+export const auth = betterAuth({
+  database: drizzleAdapter(db, {
+    provider: "pg",
+    schema: {
+      user,
+      session,
+      account,
+      verification,
+    },
+  }),
+  socialProviders: {
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    },
+  },
+  plugins: [reactStartCookies()],
+})
+```
+
+```ts
+// src/lib/auth/client.ts
+
+import { createAuthClient } from "better-auth/react"
+
+export const { signIn, signOut, useSession } = createAuthClient()
+```
+
+```ts
+// src/routes/api/auth/$.ts
+
+import { auth } from "@/lib/auth"
+
+export const ServerRoute = createServerFileRoute().methods({
+  GET: ({ request }) => {
+    return auth.handler(request)
+  },
+  POST: ({ request }) => {
+    return auth.handler(request)
+  },
+})
+```
