@@ -183,9 +183,89 @@ export const ServerRoute = createServerFileRoute().methods({
 })
 ```
 
+```tsx
+// src/components/auth-button.tsx
+
+import { signIn, signOut, useSession } from "@/lib/auth/client"
+import { useLocation, useNavigate } from "@tanstack/react-router"
+
+export default function Component() {
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const { data: session } = useSession()
+
+  if (!session && pathname === "/dashboard") navigate({ to: "/" })
+
+  return session ? (
+    <>
+      <p>Welcome, {session.user.name}.</p>
+      <button
+        className="cursor-pointer rounded-full border px-4 py-1 text-gray-100 hover:opacity-80"
+        onClick={async () => {
+          await signOut()
+          navigate({ to: "/" })
+        }}
+      >
+        Log Out
+      </button>
+    </>
+  ) : (
+    <>
+      <p>Please log in to continue.</p>
+      <button
+        className="cursor-pointer rounded-full border px-4 py-1 text-gray-100 hover:opacity-80"
+        onClick={async () =>
+          await signIn.social({
+            provider: "github",
+            callbackURL: "/dashboard",
+          })
+        }
+      >
+        Login with Github
+      </button>
+    </>
+  )
+}
+```
+
 ```sh
 npx drizzle-kit push
 
 # [✓] Pulling schema from database...
 # [✓] Changes applied
+```
+
+```tsx
+// src/routes/index.tsx
+
+import AuthButton from "@/components/auth-button"
+
+export const Route = createFileRoute({
+  component: Component,
+})
+
+function Component() {
+  return (
+    <main className="bg-radial flex min-h-dvh flex-col items-center justify-center gap-y-4 from-cyan-950 to-black p-4 text-gray-100">
+      <img
+        className="aspect-square w-full max-w-sm"
+        src="https://tanstack.com/assets/splash-dark-8nwlc0Nt.png"
+        alt="TanStack Logo"
+      />
+      <h1 className="text-2xl">
+        <span className="font-semibold">TanStack</span>
+        &nbsp;
+        <span className="text-cyan-500">Start</span>
+      </h1>
+      <AuthButton />
+      <a
+        className="rounded-full bg-gray-100 px-4 py-1 text-gray-900 hover:opacity-80"
+        href="https://tanstack.com/start/latest"
+        target="_blank"
+      >
+        Docs
+      </a>
+    </main>
+  )
+}
 ```

@@ -1,4 +1,4 @@
-import AuthButton from "@/components/auth"
+import AuthButton from "@/components/auth-button"
 
 export const Route = createFileRoute({
   component: Component,
