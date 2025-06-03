@@ -1,5 +1,4 @@
 import { useSession } from "@/lib/auth/client"
-import { Link } from "@tanstack/react-router"
 import { signIn, signOut } from "@/lib/auth/client"
 import { useNavigate, useLocation } from "@tanstack/react-router"
 
