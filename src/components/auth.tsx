@@ -43,6 +43,7 @@ export default function Component() {
         onClick={async () =>
           await signIn.social({
             provider: "github",
+            callbackURL: "/dashboard",
           })
         }
       >
