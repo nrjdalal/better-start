@@ -6,6 +6,7 @@ export default function Component() {
   const { pathname } = useLocation()
   const { data: session } = useSession()
 
+  if (session && pathname === "/") navigate({ to: "/dashboard" })
   if (!session && pathname === "/dashboard") navigate({ to: "/" })
 
   return session ? (
