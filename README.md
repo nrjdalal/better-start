@@ -64,19 +64,19 @@ GITHUB_CLIENT_SECRET=
 
 Updated project structure:
 
-```txt
-.
-├── .env // [!code ++]
-├── package.json
-├── README.md
-├── tsconfig.json
-├── vite.config.ts
-└──  src/
-    ├── router.tsx
-    └── routes/
-        ├── __root.tsx
-        ├── globals.css
-        └── index.tsx
+```diff
+  .
++ ├── .env
+  ├── package.json
+  ├── README.md
+  ├── tsconfig.json
+  ├── vite.config.ts
+  └──  src/
+      ├── router.tsx
+      └── routes/
+          ├── __root.tsx
+          ├── globals.css
+          └── index.tsx
 ```
 
 ### 3. Configure Drizzle ORM
@@ -192,24 +192,24 @@ export const verification = pgTable("verification", {
 
 Updated project structure:
 
-```txt
-.
-├── .env // [!code ++]
-├── drizzle.config.ts // [!code ++]
-├── package.json
-├── README.md
-├── tsconfig.json
-├── vite.config.ts
-└──  src/
-    ├── router.tsx
-    ├── db/
-    │   ├── index.ts // [!code ++]
-    │   └── schema/
-    │       └── auth.ts // [!code ++]
-    └── routes/
-        ├── __root.tsx
-        ├── globals.css
-        └── index.tsx
+```diff
+  .
+  ├── .env
++ ├── drizzle.config.ts
+  ├── package.json
+  ├── README.md
+  ├── tsconfig.json
+  ├── vite.config.ts
+  └──  src/
+      ├── router.tsx
+      ├── db/
++     │   ├── index.ts
+      │   └── schema/
++     │       └── auth.ts
+      └── routes/
+          ├── __root.tsx
+          ├── globals.css
+          └── index.tsx
 ```
 
 ### 4. Configure Better Auth
@@ -315,32 +315,32 @@ export default function Component() {
 Updated project structure:
 
 ```txt
-.
-├── .env
-├── drizzle.config.ts
-├── package.json
-├── README.md
-├── tsconfig.json
-├── vite.config.ts
-└──  src/
-    ├── router.tsx
-    ├── db/
-    │   ├── index.ts
-    │   └── schema/
-    │       └── auth.ts
-    ├── lib/
-    │   ├── auth/
-    │   │   ├── client.ts // [!code ++]
-    │   │   └── index.ts // [!code ++]
-    └── routes/
-        ├── api/
-        │   └── auth/
-        │       └── $.ts // [!code ++]
-        ├── components/
-        │   └── auth-button.tsx // [!code ++]
-        ├── __root.tsx
-        ├── globals.css
-        └── index.tsx
+  .
+  ├── .env
+  ├── drizzle.config.ts
+  ├── package.json
+  ├── README.md
+  ├── tsconfig.json
+  ├── vite.config.ts
+  └──  src/
+      ├── router.tsx
+      ├── db/
+      │   ├── index.ts
+      │   └── schema/
+      │       └── auth.ts
+      ├── lib/
+      │   ├── auth/
++     │   │   ├── client.ts
++     │   │   └── index.ts
+      └── routes/
+          ├── api/
+          │   └── auth/
++         │       └── $.ts
+          ├── components/
++         │   └── auth-button.tsx
+          ├── __root.tsx
+          ├── globals.css
+          └── index.tsx
 ```
 
 ### 5. Generate Database Schema
@@ -354,10 +354,10 @@ npx drizzle-kit push
 
 ### 6. Add Auth Button Existing and New Routes
 
-```tsx
+```diff
 // src/routes/index.tsx
 
-import AuthButton from "@/components/auth-button" // [!code ++]
++ import AuthButton from "@/components/auth-button"
 
 export const Route = createFileRoute({
   component: Component,
@@ -376,7 +376,7 @@ function Component() {
         &nbsp;
         <span className="text-cyan-500">Start</span>
       </h1>
-      <AuthButton /> // [!code ++]
++       <AuthButton />
       <a
         className="rounded-full bg-gray-100 px-4 py-1 text-gray-900 hover:opacity-80"
         href="https://tanstack.com/start/latest"
@@ -432,34 +432,34 @@ function Component() {
 
 Updated project structure:
 
-```txt
-.
-├── .env
-├── drizzle.config.ts
-├── package.json
-├── README.md
-├── tsconfig.json
-├── vite.config.ts
-└──  src/
-    ├── router.tsx
-    ├── db/
-    │   ├── index.ts
-    │   └── schema/
-    │       └── auth.ts
-    ├── lib/
-    │   ├── auth/
-    │   │   ├── client.ts
-    │   │   └── index.ts
-    ├── components/
-    │   └── auth-button.tsx
-    └── routes/
-        ├── api/
-        │   └── auth/
-        │       └── $.ts
-        ├── __root.tsx
-        ├── globals.css
-        ├── index.tsx
-        └── dashboard.tsx // [!code ++]
+```diff
+  .
+  ├── .env
+  ├── drizzle.config.ts
+  ├── package.json
+  ├── README.md
+  ├── tsconfig.json
+  ├── vite.config.ts
+  └──  src/
+      ├── router.tsx
+      ├── db/
+      │   ├── index.ts
+      │   └── schema/
+      │       └── auth.ts
+      ├── lib/
+      │   ├── auth/
+      │   │   ├── client.ts
+      │   │   └── index.ts
+      ├── components/
+      │   └── auth-button.tsx
+      └── routes/
+          ├── api/
+          │   └── auth/
+          │       └── $.ts
+          ├── __root.tsx
+          ├── globals.css
+          ├── index.tsx
++         └── dashboard.tsx
 ```
 
 ### 7. Verify the Implementation
