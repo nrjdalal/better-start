@@ -1,12 +1,11 @@
 import { signIn, signOut, useSession } from "@/lib/auth/client"
-import { useNavigate, useLocation } from "@tanstack/react-router"
+import { useLocation, useNavigate } from "@tanstack/react-router"
 
 export default function Component() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { data: session } = useSession()
 
-  if (session && pathname === "/") navigate({ to: "/dashboard" })
   if (!session && pathname === "/dashboard") navigate({ to: "/" })
 
   return session ? (

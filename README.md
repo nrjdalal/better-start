@@ -135,11 +135,10 @@ export const verification = pgTable("verification", {
 // src/lib/auth/index.ts
 
 import { db } from "@/db"
+import { account, session, user, verification } from "@/db/schema/auth"
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { reactStartCookies } from "better-auth/react-start"
-
-import { account, session, user, verification } from "@/db/schema/auth"
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
