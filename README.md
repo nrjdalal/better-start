@@ -6,7 +6,7 @@ title: Integrate Better Auth
 > [!IMPORTANT]
 > This guide is based on the upcoming work in the `alpha` branch of **TanStack Start**. We are actively working on exciting new features, and this guide will be updated soon.
 
-This guide provides a step-by-step process to integrate Better Auth with **TanStack Start**. We respect the powerful features of Better Auth and aim to make this implementation as smooth as possible.
+This guide provides a step-by-step process to integrate [Better Auth](https://better-auth.com) with **TanStack Start**. We respect the powerful features of Better Auth and aim to make this implementation as smooth as possible.
 
 ## Step-by-Step
 
@@ -49,7 +49,7 @@ npm i -D drizzle-kit
 
 ### 2. Configure Environment Variables
 
-```env
+```txt
 # .env
 
 BETTER_AUTH_URL=http://localhost:3000
@@ -62,21 +62,23 @@ GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 ```
 
+<!-- CAN CALLOUT TO SPONSER LIKE NEON FOR POSTGRES IN PRODUCTION -->
+
 Updated project structure:
 
-```diff
-  .
-+ ├── .env
-  ├── package.json
-  ├── README.md
-  ├── tsconfig.json
-  ├── vite.config.ts
-  └──  src/
-      ├── router.tsx
-      └── routes/
-          ├── __root.tsx
-          ├── globals.css
-          └── index.tsx
+```txt
+.
+├── .env // [!code ++]
+├── package.json
+├── README.md
+├── tsconfig.json
+├── vite.config.ts
+└──  src/
+    ├── router.tsx
+    └── routes/
+        ├── __root.tsx
+        ├── globals.css
+        └── index.tsx
 ```
 
 ### 3. Configure Drizzle ORM
@@ -192,24 +194,24 @@ export const verification = pgTable("verification", {
 
 Updated project structure:
 
-```diff
-  .
-  ├── .env
-+ ├── drizzle.config.ts
-  ├── package.json
-  ├── README.md
-  ├── tsconfig.json
-  ├── vite.config.ts
-  └──  src/
-      ├── router.tsx
-      ├── db/
-+     │   ├── index.ts
-      │   └── schema/
-+     │       └── auth.ts
-      └── routes/
-          ├── __root.tsx
-          ├── globals.css
-          └── index.tsx
+```txt
+.
+├── .env
+├── drizzle.config.ts // [!code ++]
+├── package.json
+├── README.md
+├── tsconfig.json
+├── vite.config.ts
+└──  src/
+    ├── router.tsx
+    ├── db/
+    │   ├── index.ts // [!code ++]
+    │   └── schema/
+    │       └── auth.ts // [!code ++]
+    └── routes/
+        ├── __root.tsx
+        ├── globals.css
+        └── index.tsx
 ```
 
 ### 4. Configure Better Auth
@@ -314,33 +316,33 @@ export default function Component() {
 
 Updated project structure:
 
-```diff
-  .
-  ├── .env
-  ├── drizzle.config.ts
-  ├── package.json
-  ├── README.md
-  ├── tsconfig.json
-  ├── vite.config.ts
-  └──  src/
-      ├── router.tsx
-      ├── db/
-      │   ├── index.ts
-      │   └── schema/
-      │       └── auth.ts
-      ├── lib/
-      │   ├── auth/
-+     │   │   ├── client.ts
-+     │   │   └── index.ts
-      └── routes/
-          ├── api/
-          │   └── auth/
-+         │       └── $.ts
-          ├── components/
-+         │   └── auth-button.tsx
-          ├── __root.tsx
-          ├── globals.css
-          └── index.tsx
+```txt
+.
+├── .env
+├── drizzle.config.ts
+├── package.json
+├── README.md
+├── tsconfig.json
+├── vite.config.ts
+└──  src/
+    ├── router.tsx
+    ├── db/
+    │   ├── index.ts
+    │   └── schema/
+    │       └── auth.ts
+    ├── lib/
+    │   ├── auth/
+    │   │   ├── client.ts // [!code ++]
+    │   │   └── index.ts // [!code ++]
+    └── routes/
+        ├── api/
+        │   └── auth/
+        │       └── $.ts // [!code ++]
+        ├── components/
+        │   └── auth-button.tsx // [!code ++]
+        ├── __root.tsx
+        ├── globals.css
+        └── index.tsx
 ```
 
 ### 5. Generate Database Schema
@@ -352,12 +354,12 @@ npx drizzle-kit push
 # [✓] Changes applied
 ```
 
-### 6. Add Auth Button Existing and New Routes
+### 6. Add Auth Button to Existing and New Routes
 
-```diff
+```tsx
 // src/routes/index.tsx
 
-+ import AuthButton from "@/components/auth-button"
+import AuthButton from "@/components/auth-button" // [!code ++]
 
 export const Route = createFileRoute({
   component: Component,
@@ -376,7 +378,7 @@ function Component() {
         &nbsp;
         <span className="text-cyan-500">Start</span>
       </h1>
-+       <AuthButton />
+      <AuthButton /> // [!code ++]
       <a
         className="rounded-full bg-gray-100 px-4 py-1 text-gray-900 hover:opacity-80"
         href="https://tanstack.com/start/latest"
@@ -432,34 +434,34 @@ function Component() {
 
 Updated project structure:
 
-```diff
-  .
-  ├── .env
-  ├── drizzle.config.ts
-  ├── package.json
-  ├── README.md
-  ├── tsconfig.json
-  ├── vite.config.ts
-  └──  src/
-      ├── router.tsx
-      ├── db/
-      │   ├── index.ts
-      │   └── schema/
-      │       └── auth.ts
-      ├── lib/
-      │   ├── auth/
-      │   │   ├── client.ts
-      │   │   └── index.ts
-      ├── components/
-      │   └── auth-button.tsx
-      └── routes/
-          ├── api/
-          │   └── auth/
-          │       └── $.ts
-          ├── __root.tsx
-          ├── globals.css
-          ├── index.tsx
-+         └── dashboard.tsx
+```txt
+.
+├── .env
+├── drizzle.config.ts
+├── package.json
+├── README.md
+├── tsconfig.json
+├── vite.config.ts
+└──  src/
+    ├── router.tsx
+    ├── db/
+    │   ├── index.ts
+    │   └── schema/
+    │       └── auth.ts
+    ├── lib/
+    │   ├── auth/
+    │   │   ├── client.ts
+    │   │   └── index.ts
+    ├── components/
+    │   └── auth-button.tsx
+    └── routes/
+        ├── api/
+        │   └── auth/
+        │       └── $.ts
+        ├── __root.tsx
+        ├── globals.css
+        ├── index.tsx
+        └── dashboard.tsx // [!code ++]
 ```
 
 ### 7. Verify the Implementation
@@ -474,4 +476,4 @@ Visit `http://localhost:3000` in your browser. You should see the TanStack Start
 
 You can also visit `http://localhost:3000/dashboard` directly, but you will be redirected to the home page if you are not logged in and vice versa.
 
-> If you encounter issues, review the steps above and ensure that file names and paths match exactly. For a reference implementation, see the [post-migration repository](https://github.com/nrjdalal/better-start).
+> If you encounter issues, review the steps above and ensure that file names and paths match exactly. For a reference implementation, see the [post-migration repository](https://github.com/nrjdalal/better-start) or website [demo](https://better-start.vercel.app).
