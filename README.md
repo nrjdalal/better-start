@@ -314,7 +314,7 @@ export default function Component() {
 
 Updated project structure:
 
-```txt
+```diff
   .
   ├── .env
   ├── drizzle.config.ts
